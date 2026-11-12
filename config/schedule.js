@@ -11,7 +11,7 @@ window.BIRTHDAY_PLAN = {
   date: "2026-11-13",
   timeZone: "Asia/Kolkata",
   utcOffsetMinutes: 330,
-  allowPreview: true,
+  allowPreview: false,
   opening: {
     title: "The beginning of this birthday",
     subtitle: "April 30th & May 1st - The Journey & The Surprise",
