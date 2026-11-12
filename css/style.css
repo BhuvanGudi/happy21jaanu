@@ -1,0 +1,1286 @@
+/* Visual settings: fonts, base colours, spacing */
+:root {
+  --bg: #0d1220;
+  --fg: #f3ede4;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Inter', system-ui, sans-serif;
+  --hand: 'Caveat', 'Segoe Script', cursive;
+  --slow: 1.6s
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0
+}
+
+html {
+  scroll-behavior: smooth
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font: 300 1rem/1.7 var(--sans);
+  transition: background-color var(--slow) ease, color var(--slow) ease;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased
+}
+
+section {
+  position: relative
+}
+
+h1,
+h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  line-height: 1.05
+}
+
+time {
+  font-size: .72rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  opacity: .65
+}
+
+/* reveal */
+.rv {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 1.6s ease, transform 1.6s ease
+}
+
+.rv.in {
+  opacity: 1;
+  transform: none
+}
+
+/* HUD + progress (blend so it reads on any atmosphere) */
+#hud,
+#bar {
+  position: fixed;
+  z-index: 10;
+  color: #fff;
+  mix-blend-mode: difference;
+  pointer-events: none
+}
+
+#hud {
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: max(14px, env(safe-area-inset-top)) 5vw 0;
+  font-size: .66rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  opacity: 0;
+  transition: opacity 1s
+}
+
+#hud.on {
+  opacity: .85
+}
+
+#bar {
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: #fff;
+  width: var(--w, 0)
+}
+
+/* opening */
+.open {
+  min-height: 100svh;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  text-align: center;
+  padding: 2rem 7vw;
+  gap: 1.6rem
+}
+
+.open h1 {
+  font-size: clamp(2.5rem, 8.5vw, 6rem);
+  max-width: 14ch;
+  font-weight: 300
+}
+
+.open .line {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  opacity: .8
+}
+
+.open .eyebrow {
+  font-size: .72rem;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  opacity: .6
+}
+
+#go {
+  margin-top: 2rem;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  color: inherit;
+  font: inherit;
+  letter-spacing: .2em;
+  font-size: .8rem;
+  text-transform: uppercase;
+  padding: .5rem .2rem;
+  cursor: pointer;
+  opacity: .85
+}
+
+#go:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 6px
+}
+
+/* chapter pages: quiet, text only */
+.chap {
+  min-height: 70svh;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  padding: 16vh 7vw;
+  gap: 1.2rem;
+  justify-items: center
+}
+
+.chap h2 {
+  font-size: clamp(2.2rem, 6vw, 4.2rem)
+}
+
+.chap p {
+  font-family: var(--serif);
+  font-size: clamp(1.2rem, 2.6vw, 1.6rem);
+  max-width: 36ch;
+  line-height: 1.6;
+  opacity: .85
+}
+
+/* memory items */
+.it {
+  padding: 12vh 5vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.6rem
+}
+
+.m {
+  display: block
+}
+
+.m img,
+.m video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  max-height: 86svh;
+  box-shadow: 0 30px 80px -30px rgba(0, 0, 0, .5)
+}
+
+.cap time {
+  display: block;
+  margin-bottom: .6rem
+}
+
+.cap p {
+  font-family: var(--serif);
+  font-size: clamp(1.25rem, 2.6vw, 1.75rem);
+  line-height: 1.5;
+  max-width: 34ch
+}
+
+.center .cap {
+  text-align: center
+}
+
+.center .cap p {
+  margin: auto
+}
+
+.full {
+  padding: 0;
+  min-height: 100svh;
+  justify-content: flex-end;
+  overflow: hidden;
+  color: #fff;
+  gap: 0
+}
+
+.full .m {
+  position: absolute;
+  inset: 0
+}
+
+.full .m img,
+.full .m video {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: cover;
+  object-position: var(--focus, 50% 50%);
+  box-shadow: none;
+  transform: translateY(var(--py, 0)) scale(1.08);
+  will-change: transform
+}
+
+.full .cap {
+  position: relative;
+  width: 100%;
+  padding: 24vh 7vw calc(9vh + env(safe-area-inset-bottom));
+  background: linear-gradient(transparent, rgba(0, 0, 0, .55))
+}
+
+.full:not(:has(.cap)) {
+  min-height: 100svh
+}
+
+/* ---- layouts for portrait / tall photos ---- */
+.frame {
+  padding: 14vh 7vw
+}
+
+.frame .m {
+  padding: 3.5vw;
+  border: 1px solid color-mix(in srgb, var(--fg, #eee) 22%, transparent)
+}
+
+.frame .m img,
+.frame .m video {
+  max-height: 74svh
+}
+
+.frame .cap {
+  margin-top: .4rem
+}
+
+.duo {
+  padding: 10vh 5vw
+}
+
+.duo .m {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: min(3vw, 28px);
+  width: min(1000px, 100%);
+  align-items: end
+}
+
+.duo .m img,
+.duo .m video {
+  width: 100%;
+  height: 82svh;
+  object-fit: cover;
+  box-shadow: 0 30px 80px -30px rgba(0, 0, 0, .5)
+}
+
+.duo .cap {
+  text-align: center
+}
+
+.duo .cap p {
+  margin: auto
+}
+
+@media(max-width:640px) {
+  .duo .m {
+    grid-template-columns: 1fr;
+  }
+
+  .duo .m img,
+  .duo .m video {
+    height: 58svh
+  }
+}
+
+.scroll {
+  padding: 0;
+  gap: 0
+}
+
+.scroll-track {
+  position: relative;
+  width: 100%;
+  height: 230vh
+}
+
+.scroll-frame {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  width: 100%;
+  overflow: hidden
+}
+
+.scroll-frame img,
+.scroll-frame video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  min-height: 130%;
+  object-fit: cover;
+  object-position: 50% 0;
+  will-change: transform
+}
+
+.scroll .cap {
+  position: relative;
+  padding: 10vh 7vw 14vh;
+  text-align: center
+}
+
+.scroll .cap p {
+  margin: auto;
+  max-width: 32ch
+}
+
+.split {
+  flex-direction: row;
+  gap: 5vw;
+  max-width: 1250px;
+  margin: 0 auto;
+  align-items: center
+}
+
+.split.flip {
+  flex-direction: row-reverse
+}
+
+.split .m {
+  flex: 1.5;
+  min-width: 0
+}
+
+.split .cap {
+  flex: 1
+}
+
+.card {
+  align-items: flex-start;
+  padding-left: 9vw
+}
+
+.card.flip {
+  align-items: flex-end;
+  padding-right: 9vw
+}
+
+.card .m img {
+  max-width: min(420px, 78vw);
+  max-height: 70svh
+}
+
+.pair .m {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  gap: 14px;
+  align-items: center;
+  width: min(1150px, 100%)
+}
+
+.pair .m img {
+  width: 100%
+}
+
+.pair .cap {
+  text-align: center
+}
+
+.pair .cap p {
+  margin: auto
+}
+
+/* birthday */
+.bday {
+  min-height: 100svh;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  justify-items: center;
+  padding: 18vh 7vw;
+  gap: 1.8rem
+}
+
+.bday h2 {
+  font-size: clamp(2.6rem, 8vw, 5.6rem);
+  font-weight: 300
+}
+
+.bday p {
+  font-family: var(--serif);
+  font-size: clamp(1.3rem, 3vw, 1.9rem);
+  max-width: 30ch;
+  line-height: 1.55
+}
+
+/* letter */
+.letter {
+  padding: 18vh 5vw;
+  display: flex;
+  justify-content: center
+}
+
+.paper {
+  width: min(700px, 100%);
+  padding: clamp(1.8rem, 7vw, 4.5rem);
+  color: #3a2f26;
+  background: radial-gradient(120% 80% at 20% 0%, #fbf5e8, #f1e6d1);
+  border-radius: 3px;
+  box-shadow: 0 50px 120px -40px rgba(0, 0, 0, .7), inset 0 0 60px rgba(150, 110, 60, .12)
+}
+
+.paper h2 {
+  font-family: var(--hand);
+  font-weight: 500;
+  font-size: clamp(2.4rem, 8vw, 3.6rem);
+  margin-bottom: 1.4rem
+}
+
+.paper .txt {
+  font-family: var(--serif);
+  font-size: clamp(1.15rem, 3.8vw, 1.42rem);
+  line-height: 1.85;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere
+}
+
+.paper .sig {
+  font-family: var(--hand);
+  font-size: 2.2rem;
+  text-align: right;
+  margin-top: 1.6rem
+}
+
+@media(max-width:760px) {
+
+  .split,
+  .split.flip {
+    flex-direction: column;
+    gap: 1.6rem
+  }
+
+  .it {
+    padding: 9vh 5vw
+  }
+
+  .card,
+  .card.flip {
+    align-items: center;
+    padding: 9vh 5vw
+  }
+
+  .full .cap {
+    padding-top: 30vh
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  .rv {
+    transition: none;
+    opacity: 1;
+    transform: none
+  }
+
+  html {
+    scroll-behavior: auto
+  }
+
+  body {
+    transition: none
+  }
+}
+
+/* ---- photo effects: turned on per item with fx: "name" in story.js ---- */
+.fx-zoom,
+.fx-kenburns {
+  overflow: hidden;
+  box-shadow: 0 30px 80px -30px rgba(0, 0, 0, .5)
+}
+
+.fx-zoom img,
+.fx-kenburns img {
+  box-shadow: none
+}
+
+.fx-zoom img {
+  transition: transform 1.4s cubic-bezier(.2, .8, .2, 1)
+}
+
+.fx-zoom:hover img {
+  transform: scale(1.08)
+}
+
+.fx-kenburns img {
+  animation: kb 16s ease-in-out infinite alternate
+}
+
+@keyframes kb {
+  to {
+    transform: scale(1.15) translate(-2%, -2%)
+  }
+}
+
+.fx-color img {
+  filter: grayscale(1);
+  transition: filter 2.5s ease .3s
+}
+
+.fx-color.in img {
+  filter: none
+}
+
+.fx-wipe img {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 1.8s cubic-bezier(.2, .8, .2, 1)
+}
+
+.fx-wipe.in img {
+  clip-path: inset(0)
+}
+
+.fx-tilt {
+  position: relative;
+  perspective: 900px;
+  width: fit-content
+}
+
+.fx-tilt img {
+  transform: rotateY(calc((var(--fx, .5) - .5)*14deg)) rotateX(calc((var(--fy, .5) - .5)*-14deg));
+  transition: transform 1s cubic-bezier(.2, .8, .2, 1)
+}
+
+.fx-tilt:hover img {
+  transition-duration: .4s
+}
+
+.fx-tilt::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), #fff5, transparent 45%);
+  mix-blend-mode: soft-light;
+  opacity: 0;
+  transition: opacity .4s;
+  pointer-events: none
+}
+
+.fx-tilt:hover::after {
+  opacity: 1
+}
+
+@media(prefers-reduced-motion:reduce) {
+  .fx-kenburns img {
+    animation: none
+  }
+
+  .fx-wipe img {
+    clip-path: none
+  }
+
+  .fx-color img {
+    filter: none
+  }
+}
+/* ---- timed birthday experience ---- */
+.timed-landing .landing-countdown,
+.landing-countdown {
+  font: 400 .9rem/1.6 var(--sans);
+  letter-spacing: .12em;
+  opacity: .7;
+  font-variant-numeric: tabular-nums;
+}
+
+.release {
+  min-height: 68svh;
+  padding: clamp(5rem, 13vh, 10rem) 7vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.5rem, 4vh, 3rem);
+  text-align: center;
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 1s ease, transform 1s ease;
+  scroll-margin-top: 2rem;
+}
+.release.in { opacity: 1; transform: none; }
+.release-heading { width: min(900px, 100%); display: grid; justify-items: center; gap: 1rem; }
+.release-time { font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; opacity: .7; }
+.release-heading h2 { font-size: clamp(2.4rem, 7vw, 5.5rem); max-width: 16ch; }
+.release-subtitle { font: italic 1.2rem/1.5 var(--serif); opacity: .75; }
+.release-message { max-width: 42rem; white-space: pre-wrap; font: 400 clamp(1.15rem, 2.5vw, 1.5rem)/1.8 var(--serif); }
+.content-pending { font-size: .75rem; opacity: .38; }
+.memory-media { width: min(1000px, 100%); display: grid; justify-items: center; gap: 1rem; }
+.memory-media img, .memory-media video { display: block; max-width: 100%; max-height: 78svh; object-fit: contain; box-shadow: 0 25px 70px -30px rgba(0,0,0,.5); }
+.memory-media.full { width: 100%; }
+.memory-media.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.memory-media.pair img, .memory-media.pair video { width: 100%; }
+.memory-caption { display: grid; gap: .45rem; max-width: 38rem; }
+.memory-caption time { opacity: .6; font-size: .7rem; }
+.memory-caption p { font: 400 clamp(1.2rem, 2.7vw, 1.7rem)/1.6 var(--serif); white-space: pre-wrap; }
+.content-note { width: min(680px, 100%); padding: clamp(1.4rem, 5vw, 3rem); border: 1px solid color-mix(in srgb, var(--fg) 18%, transparent); }
+.content-note h3 { font: 400 clamp(1.6rem, 4vw, 2.5rem)/1.2 var(--serif); margin-bottom: .8rem; }
+.content-note p { font: 400 clamp(1.2rem, 2.7vw, 1.6rem)/1.7 var(--serif); white-space: pre-wrap; }
+.birthday-creations { background: color-mix(in srgb, var(--fg) 4%, transparent); }
+.after-departure .release-subtitle { font-style: italic; }
+.closing-bridge { min-height: 52svh; }
+.final-letter { isolation: isolate; min-height: 100svh; position: relative; overflow: hidden; padding: clamp(5rem, 12vh, 9rem) 5vw; }
+.final-letter::before { content: ''; position: absolute; z-index: -2; inset: 0; background-image: var(--final-photo, none); background-position: center; background-size: cover; opacity: var(--final-photo-opacity, .2); filter: saturate(.72); }
+.final-letter::after { content: ''; position: absolute; z-index: -1; inset: 0; background: linear-gradient(145deg, rgba(8,10,15,.62), rgba(18,14,14,.82)); }
+.final-heading h2 { font-size: clamp(2.5rem, 7vw, 5rem); }
+.final-paper { width: min(760px, 100%); padding: clamp(1.5rem, 6vw, 4rem); background: rgba(16, 15, 17, .42); border: 1px solid rgba(255,255,255,.14); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); box-shadow: 0 35px 100px rgba(0,0,0,.18); text-align: left; }
+.final-letter-text { color: #f5eee5; font: 400 clamp(1.15rem, 3vw, 1.45rem)/1.9 var(--serif); white-space: pre-wrap; overflow-wrap: anywhere; }
+.final-signature { margin-top: 1.5rem; color: #f5eee5; text-align: right; font: 500 2rem var(--hand); }
+.next-release { display: grid; justify-items: center; gap: .5rem; text-align: center; padding: 2.5rem 1.5rem 5rem; opacity: .8; }
+.next-release h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); }
+.next-kicker { font-size: .65rem; letter-spacing: .24em; }
+.next-countdown { font-variant-numeric: tabular-nums; letter-spacing: .12em; font-size: .9rem; }
+.unlock-notice { position: fixed; z-index: 30; left: 50%; bottom: max(1.2rem, env(safe-area-inset-bottom)); transform: translate(-50%, 20px); width: min(92vw, 620px); padding: .85rem 1rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; background: rgba(18, 18, 22, .94); color: #f7f1e8; border: 1px solid rgba(255,255,255,.15); box-shadow: 0 12px 45px rgba(0,0,0,.25); opacity: 0; pointer-events: none; transition: opacity .3s, transform .3s; font-size: .8rem; }
+.unlock-notice.visible { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+.unlock-notice button { flex-shrink: 0; padding: .55rem .7rem; color: inherit; background: transparent; border: 1px solid rgba(255,255,255,.5); font: inherit; cursor: pointer; }
+.preview-tools { position: fixed; z-index: 40; right: 1rem; bottom: 1rem; width: min(280px, calc(100vw - 2rem)); padding: 1rem; display: grid; gap: .5rem; background: #f5eee5; color: #252128; border: 1px solid rgba(0,0,0,.2); box-shadow: 0 10px 40px rgba(0,0,0,.2); font: .75rem/1.5 var(--sans); }
+.preview-tools label { font-weight: 600; }
+.preview-tools select { width: 100%; padding: .55rem; font: inherit; background: white; color: #222; border: 1px solid #aaa; }
+.preview-tools p { opacity: .7; }
+@media(max-width:640px) {
+  .memory-media.pair { grid-template-columns: 1fr; }
+  .release { padding-left: 5vw; padding-right: 5vw; }
+  .unlock-notice { align-items: flex-start; }
+  .final-paper { padding: 1.4rem; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .release, .unlock-notice { transition: none; transform: none; }
+}
+
+/* 1. Stack Container & Height Fix */
+.memory-media.stack {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  margin: 1.5rem auto 1.5rem !important;   /* Zero bottom margin */
+}
+
+.memory-media.stack .box.st {
+  position: relative !important;
+  width: min(360px, 85vw) !important;
+  height: 230px !important;           /* Matches the photo height directly; removes ~150px of empty space */
+  cursor: pointer !important;
+  user-select: none !important;
+}
+
+/* 2. Uncropped Card Rendering */
+.memory-media.stack .box.st .ph {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: #151922 !important;
+  border: 7px solid #f4eee5 !important;
+  border-radius: 6px !important;
+  box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.75) !important;
+  transition: transform 0.4s cubic-bezier(.2, .8, .2, 1) !important;
+  overflow: hidden !important;
+}
+
+.memory-media.stack .box.st .ph img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+}
+
+/* Fan out angles on hover */
+.memory-media.stack .box.st .ph:nth-last-child(1) { transform: rotate(-2deg); }
+.memory-media.stack .box.st .ph:nth-last-child(2) { transform: rotate(3deg) translate(2%, 1%); }
+.memory-media.stack .box.st .ph:nth-last-child(3) { transform: rotate(-4deg) translate(-2%, 2%); }
+.memory-media.stack .box.st .ph:nth-last-child(4) { transform: rotate(6deg) translate(3%, 3%); }
+.memory-media.stack .box.st .ph:nth-last-child(5) { transform: rotate(-6deg) translate(-3%, 4%); }
+.memory-media.stack .box.st .ph:nth-last-child(6) { transform: rotate(1deg) translate(0, 5%); }
+
+.memory-media.stack .box.st:hover .ph:nth-last-child(2) { transform: rotate(8deg) translate(24%, 0); }
+.memory-media.stack .box.st:hover .ph:nth-last-child(3) { transform: rotate(-8deg) translate(-24%, 0); }
+.memory-media.stack .box.st:hover .ph:nth-last-child(4) { transform: rotate(14deg) translate(40%, 0); }
+.memory-media.stack .box.st:hover .ph:nth-last-child(5) { transform: rotate(-14deg) translate(-40%, 0); }
+
+/* 3. True 3-Across Video Trio (Single Line on Laptop) */
+.memory-media.trio {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 1.25rem !important;
+  width: min(1100px, 92vw) !important;
+  margin: 1rem auto 2rem !important;  /* Tight top margin pulls it right under the stack */
+  align-items: center !important;
+}
+
+.memory-media.trio video,
+.memory-media.trio img {
+  width: 100% !important;
+  height: 220px !important;
+  object-fit: cover !important;
+  border-radius: 4px !important;
+  box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.5) !important;
+}
+
+.memory-media.trio {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 1.25rem !important;
+  width: min(1050px, 92vw) !important;
+  margin: 1.5rem auto !important;
+  align-items: center !important;
+}
+
+/* Videos stay letterboxed landscape */
+.memory-media.trio video {
+  width: 100% !important;
+  height: 220px !important;
+  object-fit: cover !important;
+  border-radius: 4px !important;
+  box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Vertical portrait photos get natural tall 3:4 aspect ratio */
+.memory-media.trio img {
+  width: 100% !important;
+  aspect-ratio: 3/4 !important;
+  height: 380px !important;
+  object-fit: cover !important;
+  border-radius: 4px !important;
+  box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* True 3-Across Layout on Laptop */
+.memory-media.trio {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 1.25rem !important;
+  width: min(1050px, 92vw) !important;
+  margin: 1.5rem auto !important;
+  align-items: start !important;
+}
+
+/* Portrait Aspect Ratio (Allows tall portrait videos and photos to render fully) */
+.memory-media.trio video,
+.memory-media.trio img {
+  width: 100% !important;
+  aspect-ratio: 9/16 !important;   /* Natural portrait phone shape */
+  max-height: 520px !important;    /* Keeps them proportional on laptop screens */
+  height: auto !important;
+  object-fit: cover !important;
+  border-radius: 6px !important;
+  box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* ============================================================
+   LAYOUT 11: HORIZONTAL ACCORDION EXPAND (.acc)
+   ============================================================ */
+.memory-media.accordion,
+.memory-media.acc {
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  margin: 2.5rem 0 !important;
+}
+
+.memory-media.accordion .acc,
+.memory-media.acc .acc {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 10px !important;
+  width: min(1050px, 94vw) !important;
+  height: 380px !important;            /* Fixed clean height on laptop */
+  overflow: hidden !important;
+}
+
+.memory-media.accordion .acc .ph,
+.memory-media.acc .acc .ph {
+  flex: 1 !important;
+  height: 100% !important;
+  position: relative !important;
+  overflow: hidden !important;
+  border-radius: 6px !important;
+  filter: brightness(0.65) !important;
+  transition: flex 0.8s cubic-bezier(.2, .8, .2, 1), filter 0.6s ease !important;
+  cursor: pointer !important;
+  box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.5) !important;
+}
+
+.memory-media.accordion .acc .ph img,
+.memory-media.accordion .acc .ph video,
+.memory-media.acc .acc .ph img,
+.memory-media.acc .acc .ph video {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  object-position: center !important;
+}
+
+/* On laptop hover, the active photo expands wide while brightening */
+.memory-media.accordion .acc .ph:hover,
+.memory-media.acc .acc .ph:hover {
+  flex: 4.5 !important;
+  filter: brightness(1) !important;
+}
+
+/* ============================================================
+   INFINITE TICKER: LEFT TO RIGHT, B&W TO COLOR + ZOOM ON HOVER
+   ============================================================ */
+.memory-media.ticker,
+.memory-media.marquee {
+  width: 100vw !important;
+  max-width: 100vw !important;
+  margin-left: calc(-50vw + 50%) !important;
+  margin-right: calc(-50vw + 50%) !important;
+  overflow: hidden !important;
+  padding: 3rem 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+.ticker-wrap {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  position: relative;
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+.ticker-track {
+  display: flex;
+  gap: 1.5rem;
+  width: max-content;
+  /* Left-to-right drift: starts at -50% and scrolls to 0% */
+  animation: scroll-left-to-right 28s linear infinite;
+  will-change: transform;
+}
+
+/* Pause the entire row when hovered */
+.ticker-wrap:hover .ticker-track {
+  animation-play-state: paused !important;
+}
+
+.ticker-item {
+  flex-shrink: 0;
+  width: min(260px, 65vw);
+  height: 360px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  background: #11141c;
+  /* Default: grayscale and slightly dimmed */
+  filter: grayscale(1) contrast(1.05) brightness(0.85);
+  transition: transform 0.45s cubic-bezier(.2, .8, .2, 1), filter 0.45s ease, box-shadow 0.45s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.ticker-item img,
+.ticker-item video {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block;
+}
+
+/* Hovered image: returns to color, scales larger, and lifts forward */
+.ticker-item:hover {
+  filter: none !important;
+  transform: scale(1.15) translateY(-6px) !important;
+  box-shadow: 0 24px 50px -12px rgba(0, 0, 0, 0.9) !important;
+  z-index: 10 !important;
+}
+
+/* Keyframes: seamlessly slides from -50% to 0% (left to right) */
+@keyframes scroll-left-to-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+/* ============================================================
+   HORIZONTAL TRIO (3 Landscape Images Fully Contained, No Cuts)
+   ============================================================ */
+.memory-media.trio-horizontal,
+.memory-media.trio-wide {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important; /* Forces all 3 columns to stay strictly equal */
+  gap: 1.25rem !important;
+  width: min(1050px, 100%) !important;                        /* Fits neatly inside parent without overflowing */
+  margin: 2rem auto !important;
+  padding: 0 1.5rem !important;                                /* Ensures equal breathing room on both left and right */
+  box-sizing: border-box !important;
+  align-items: center !important;
+}
+
+.memory-media.trio-horizontal img,
+.memory-media.trio-horizontal video,
+.memory-media.trio-wide img,
+.memory-media.trio-wide video {
+  width: 100% !important;
+  height: auto !important;          /* Lets the height adjust naturally to the photo */
+  max-height: 260px !important;     /* Keeps the row clean on laptops */
+  aspect-ratio: auto !important;     /* Removes forced cropping */
+  object-fit: contain !important;    /* Guarantees 100% of every photo is visible */
+  border-radius: 6px !important;
+  box-shadow: 0 14px 32px -10px rgba(0, 0, 0, 0.6) !important;
+  transition: transform 0.4s ease, filter 0.4s ease !important;
+  background: #11141c !important;    /* Clean dark framing */
+}
+
+.memory-media.trio-horizontal img:hover,
+.memory-media.trio-wide img:hover {
+  transform: scale(1.04) !important;
+}
+
+/* ============================================================
+   PASSWORD LOCK GATE (Hour 04)
+   ============================================================ */
+.password-lock-box {
+  margin: 2rem auto;
+  padding: clamp(2rem, 5vw, 3rem) 2.5rem;
+  background: rgba(18, 22, 33, 0.7);
+  border: 1px solid rgba(243, 237, 228, 0.2);
+  border-radius: 8px;
+  box-shadow: 0 25px 60px -20px rgba(0, 0, 0, 0.7);
+  width: min(540px, 90vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  text-align: center;
+}
+
+.password-lock-box .lock-title {
+  font-family: var(--serif);
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  color: var(--fg);
+}
+
+.password-lock-box .lock-hint {
+  font-family: var(--hand);
+  font-size: 1.45rem;
+  color: #eed9b3;
+  opacity: 0.95;
+  margin-top: -0.4rem;
+}
+
+.password-lock-box .lock-hint.pending {
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.45;
+}
+
+.password-lock-box .lock-form {
+  display: flex;
+  gap: 0.6rem;
+  width: 100%;
+  max-width: 420px;
+}
+
+.password-lock-box .lock-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(243, 237, 228, 0.25);
+  border-radius: 4px;
+  color: #fff;
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.password-lock-box .lock-input:focus {
+  border-color: #eed9b3;
+}
+
+.password-lock-box .lock-btn {
+  padding: 0.75rem 1.4rem;
+  background: #f3ede4;
+  color: #0d1220;
+  border: none;
+  border-radius: 4px;
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: opacity 0.3s, transform 0.2s;
+}
+
+.password-lock-box .lock-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.password-lock-box .lock-error {
+  color: #ff8b8b;
+  font-size: 0.85rem;
+  min-height: 1.2rem;
+}
+
+.secret-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ============================================================
+   MINI CARD STAGE (Card + Side Caption)
+   ============================================================ */
+.memory-media.card-mini {
+  width: min(720px, 92vw) !important;
+  display: flex !important;
+  flex-direction: row !important;       /* Places card and caption side-by-side */
+  align-items: center !important;
+  justify-content: center !important;
+  gap: clamp(1.5rem, 4vw, 3rem) !important;
+  margin: 2.5rem auto !important;
+}
+
+.memory-media.card-mini video,
+.memory-media.card-mini img {
+  flex-shrink: 0 !important;
+  width: min(320px, 60vw) !important;
+  max-height: 260px !important;
+  object-fit: cover !important;
+  background: #151922 !important;
+  border: 7px solid #f4eee5 !important;
+  border-radius: 6px !important;
+  box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.75) !important;
+  transform: rotate(-1.5deg);
+  transition: transform 0.4s ease, box-shadow 0.4s ease !important;
+}
+
+.memory-media.card-mini video:hover,
+.memory-media.card-mini img:hover {
+  transform: rotate(0deg) scale(1.03) !important;
+  box-shadow: 0 22px 45px -12px rgba(0, 0, 0, 0.85) !important;
+}
+
+/* Side Caption Styling */
+.memory-media.card-mini .memory-caption {
+  text-align: left !important;
+  max-width: 24ch !important;
+}
+
+.memory-media.card-mini .memory-caption p {
+  font-family: var(--serif) !important;
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem) !important;
+  line-height: 1.45 !important;
+  margin: 0 !important;
+}
+
+@media (max-width: 640px) {
+  .memory-media.card-mini {
+    flex-direction: column !important;
+    text-align: center !important;
+  }
+  .memory-media.card-mini .memory-caption {
+    text-align: center !important;
+  }
+}
+
+/* ============================================================
+   VERTICAL STACK (Portrait Cards Pile with Click-to-Shuffle)
+   ============================================================ */
+.memory-media.stack-vertical {
+  position: relative !important;
+  width: min(320px, 85vw) !important;
+  height: 460px !important;            /* Tall portrait card frame */
+  margin: 2.5rem auto 3.5rem !important;
+  display: block !important;
+  cursor: pointer !important;
+}
+
+.memory-media.stack-vertical .stack-card {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 10px !important;
+  overflow: hidden !important;
+  background: #11141c !important;
+  border: 7px solid #f4eee5 !important; /* Clean Polaroid border */
+  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.75) !important;
+  transition: transform 0.45s cubic-bezier(.2, .8, .2, 1), opacity 0.4s ease !important;
+  user-select: none !important;
+}
+
+.memory-media.stack-vertical .stack-card img,
+.memory-media.stack-vertical .stack-card video {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  display: block !important;
+}
+
+/* Natural randomized card pile rotation */
+.memory-media.stack-vertical .stack-card:nth-child(1) { transform: rotate(-3deg); z-index: 5; }
+.memory-media.stack-vertical .stack-card:nth-child(2) { transform: rotate(2.5deg); z-index: 4; }
+.memory-media.stack-vertical .stack-card:nth-child(3) { transform: rotate(-1.5deg); z-index: 3; }
+.memory-media.stack-vertical .stack-card:nth-child(4) { transform: rotate(3.5deg); z-index: 2; }
+.memory-media.stack-vertical .stack-card:nth-child(n+5) { transform: rotate(0deg); z-index: 1; }
+
+.memory-media.stack-vertical:hover .stack-card:nth-child(1) {
+  transform: rotate(-1deg) scale(1.02);
+}
+
+/* ============================================================
+   VERTICAL STACK (Fix: Lock dimensions on .stack-inner)
+   ============================================================ */
+.memory-media.stack-vertical {
+  width: auto !important;
+  height: auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  margin: 1.5rem auto !important;
+}
+
+/* The actual portrait card container */
+.memory-media.stack-vertical .stack-inner {
+  position: relative !important;
+  width: 280px !important;              /* Portrait card width */
+  height: 420px !important;             /* Tall 2:3 vertical portrait height */
+  aspect-ratio: 2 / 3 !important;        /* Guarantees it never collapses into a square */
+  margin: 0 auto !important;
+  cursor: pointer !important;
+}
+
+.memory-media.stack-vertical .stack-card {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 10px !important;
+  overflow: hidden !important;
+  background: #11141c !important;
+  border: 7px solid #f4eee5 !important;
+  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.75) !important;
+  transition: transform 0.45s cubic-bezier(.2, .8, .2, 1), opacity 0.4s ease !important;
+  user-select: none !important;
+}
+
+.memory-media.stack-vertical .stack-card img,
+.memory-media.stack-vertical .stack-card video {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  display: block !important;
+}
+
+/* Rotations */
+.memory-media.stack-vertical .stack-card:nth-child(1) { transform: rotate(-3deg); z-index: 5; }
+.memory-media.stack-vertical .stack-card:nth-child(2) { transform: rotate(2.5deg); z-index: 4; }
+.memory-media.stack-vertical .stack-card:nth-child(3) { transform: rotate(-1.5deg); z-index: 3; }
+.memory-media.stack-vertical .stack-card:nth-child(4) { transform: rotate(3.5deg); z-index: 2; }
+.memory-media.stack-vertical .stack-card:nth-child(n+5) { transform: rotate(0deg); z-index: 1; }
+
+.memory-media.stack-vertical .memory-caption {
+  margin-top: 1.25rem !important;
+  text-align: center !important;
+  max-width: 26ch !important;
+}
+
+/* ============================================================
+   SPLIT ROW (Strict 2-Column Side-by-Side on Desktop)
+   ============================================================ */
+.memory-split-row {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+  gap: clamp(2rem, 4vw, 4rem) !important;
+  width: min(1000px, 94vw) !important;
+  margin: 3rem auto !important;
+  align-items: center !important;
+  justify-items: center !important;
+}
+
+/* 1. Left Item (Card Mini): Stack image above caption inside its half */
+.memory-split-row .memory-media.card-mini {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  margin: 0 !important;
+  width: 100% !important;
+  gap: 1rem !important;
+}
+
+.memory-split-row .memory-media.card-mini img,
+.memory-split-row .memory-media.card-mini video {
+  width: 280px !important;
+  height: 380px !important;
+  max-width: 90% !important;
+  object-fit: cover !important;
+  margin: 0 auto !important;
+}
+
+.memory-split-row .memory-media.card-mini .memory-caption {
+  text-align: center !important;
+  max-width: 26ch !important;
+  margin: 0 auto !important;
+}
+
+/* 2. Right Item (Vertical Stack): Perfectly aligned */
+.memory-split-row .memory-media.stack-vertical {
+  margin: 0 !important;
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+.memory-split-row .memory-media.stack-vertical .stack-inner {
+  width: 280px !important;
+  height: 380px !important;       /* Matches the card beside it */
+  position: relative !important;
+  cursor: pointer !important;
+}
+
+.memory-split-row .memory-media.stack-vertical .memory-caption {
+  text-align: center !important;
+  max-width: 26ch !important;
+  margin-top: 1rem !important;
+}
+
+/* Collapse cleanly only on small phone screens */
+@media (max-width: 768px) {
+  .memory-split-row {
+    grid-template-columns: 1fr !important;
+    gap: 3.5rem !important;
+  }
+}
+
+section[data-hour="7"] .ticker-track {
+  animation-duration: 110s !important; /* slow glide */
+}

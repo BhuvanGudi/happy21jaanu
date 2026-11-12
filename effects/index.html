@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Photo effects lab</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,400&family=Inter:wght@300;400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="effects.css">
+</head>
+
+<body>
+    <i class="cur"></i>
+    <svg width="0" height="0" style="position:absolute">
+        <filter id="lq">
+            <feTurbulence type="fractalNoise" baseFrequency=".01 .018" numOctaves="2" result="n">
+                <animate attributeName="baseFrequency" dur="9s" values=".01 .018;.018 .03;.01 .018"
+                    repeatCount="indefinite" />
+            </feTurbulence>
+            <feDisplacementMap in="SourceGraphic" in2="n" scale="50" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+    </svg>
+    <header class="hd">
+        <h1>Photo effects lab</h1>
+        <p>One section per technique. Each has its own CSS block in <code>effects.css</code> (search its number, e.g.
+            <code>/* 03 */</code>). Photos come from <code>../media</code>; set the filenames at the top of
+            <code>effects.js</code>. Missing photos show colour placeholders so effects stay visible.</p>
+        <nav id="nav"></nav>
+    </header>
+    <main>
+
+        <section class="ex">
+            <h2><b>01</b>Fade</h2>
+            <p class="why">Slow crossfade loop. Change the 12s duration and the 30%/38% keyframe stops to alter hold and
+                fade time.</p>
+            <div class="stage">
+                <div class="demo">
+                    <div class="box fade">
+                        <div class="ph" data-i="0"></div>
+                        <div class="ph" data-i="1"></div>
+                        <div class="ph" data-i="2"></div>
+                    </div><small>Crossfade loop</small>
+                </div>
+            </div>
+        </section>
+
+        <section class="ex">
+            <h2><b>02</b>Zoom &amp; Scale</h2>
+            <p class="why">Hover zoom, slow Ken Burns drift, and a lens that zooms toward the cursor.</p>
+            <div class="stage">
+                <div class="demo">
+                    <div class="box zh">
+                        <div class="ph" data-i="0"></div>
+                    </div><small>Hover zoom</small>
+                </div>
+                <div class="demo">
+                    <div class="box kb">
+                        <div class="ph" data-i="1"></div>
+                    </div><small>Ken Burns</small>
+                </div>
+                <div class="demo">
+                    <div class="box lens" data-track>
+                        <div class="ph" data-i="2"></div>
+                    </div><small>Cursor lens</small>
+                </div>
+            </div>
+        </section>
+
+        <section class="ex">
+            <h2><b>03</b>3D Perspective</h2>
+            <p class="why">Cursor tilt with a light glare and a floating caption, plus a flip card with a message on the
+                back.</p>
+            <div class="stage">
+                <div class="demo">
+                    <div class="tw" data-track>
+                        <div class="box tilt">
+                            <div class="ph" data-i="0"></div><span class="cap">Your caption</span>
+                        </div>
+                    </div><small>Tilt + glare</small>
+                </div>
+                <div class="demo">
+                    <div class="box flip">
+                        <div class="fi">
+                            <div class="ff">
+                                <div class="ph" data-i="1"></div>
+                            </div>
+                            <div class="fb">Your message goes here</div>
+                        </div>
+                    </div><small>Flip card</small>
+                </div>
+            </div>
+        </section>
+
+        <section class="ex">
+            <h2><b>04</b>Image Stack</h2>
+            <p class="why">Hover to fan the stack out. Click to send the top photo to the back.</p>
+            <div class="stage">
+                <div class="demo">
+                    <div class="box st">
+                        <div class="ph" data-i="0"></div>
+                        <div class="ph" data-i="1"></div>
+                        <div class="ph" data-i="2"></div>
+                    </div><small>Fan + cycle</small>
+                </div>
+            </div>
+        </section>
+
+        <section class="ex">
+            <h2><b>05</b>Hover Effects</h2>
+            <p class="why">Four small hover behaviours: colour returns, caption slides up, shape morphs, light sweeps
+                across.</p>
+            <div class="stage">
+                <div class="demo">
+                    <div class="box h1">
+                        <div class="ph" data-i="0"></div>
+                    </div><small>Grey to colour + lift</small>
+                </div>
+                <div class="demo">
+                    <div class="box h2">
+                        <div class="ph" data-i="1"></div>
+                        <div class="cap2">Your caption</div>
+                    </div><small>Caption slide</small>
+                </div>
+                <div class="demo">
+                    <div class="box h3">
+                        <div class="ph" data-i="2"></div>
+                    </div><small>Shape morph</small>
+                </div>
+                <div class="demo">
+                    <div class="box h4">
+                        <div class="ph" data-i="3"></div>
+                    </div><small>Light sweep</small>
+                </div>
+            </div>
+        </section>
+
+        <section class="ex">
+            <h2><b>06</b>Reveal &amp; Mask</h2>
+            <p class="why">Clip-path and mask reveals. The first one plays when scrolled into view.</p>
+            <div class="stage">
+                <div class="demo">
+                    <div class="box rev">
+                        <div class="ph" data-i="0"></div>
+                    </div><small>Scroll wipe</small>
+                </div>
+                <div class="demo">
+                    <div class="box wc">
+                        <div class="ph" data-i="1"></div>
+                    </div><small>Circle open (hover)</small>
+                </div>
+                <div class="demo">
+                    <div class="box dw">
+                        <div class="ph" data-i="2"></div>
+                    </div><small>Side wipe (hover)</small>
+                </div>
+                <div class="demo">
+                    <div class="box mk">
+                        <div class="ph" data-i="3"></div>
+                    </div><small>Gradient mask fade</small>
+                </div>
+            </div>
+        </section>
+
+        <section class="ex">
+            <h2><b>07</b>Blur &amp; Focus</h2>
+            <p class="why">Hover one photo and the others fall out of focus. Then a depth-of-field lens that follows the
+                cursor.</p>
+            <div class="stage">
+                <div class="gal">
+                    <div class="ph" data-i="0"></div>
+                    <div class="ph" data-i="1"></div>
+                    <div class="ph" data-i="2"></div>
+                    <div class="ph" data-i="3"></div>
+                </div>
+                <div class="demo">
+                    <div class="box dof" data-track>
+                        <div class="ph" data-i="1"></div>
+                        <div class="ph" data-i="1"></div>
+                    </div><small>Focus lens</small>
+                </div>
+            </div>
+        </section>
+
+        <section class="ex">
+            <h2><b>08</b>Parallax</h2>
+            <p class="why">Scroll-driven image drift (modern browsers) and three layers that shift at different depths
+                with the cursor.</p>
+            <div class="stage">
+                <div class="demo">
+                    <div class="box pv">
+                        <div class="ph" data-i="0"></div>
+                    </div><small>Scroll parallax</small>
+                </div>
+                <div class="demo">
+                    <div class="box ml" data-track>
+                        <div class="ph" data-i="0"></div>
+                        <div class="ph" data-i="1"></div>
+                        <div class="ph" data-i="2"></div>
+                    </div><small>Layered depth</small>
+                </div>
+            </div>
+        </section>
+
+        <section class="ex">
+            <h2><b>09</b>Distortion &amp; Morphing</h2>
+            <p class="why">Hover for a liquid ripple (SVG filter <code>#lq</code> in index.html). The second photo
+                morphs its outline continuously.</p>
+            <div class="stage">
+                <div class="demo">
+                    <div class="box lq">
+                        <div class="ph" data-i="0"></div>
+                    </div><small>Liquid ripple</small>
+                </div>
+                <div class="demo">
+                    <div class="box bl">
+                        <div class="ph" data-i="1"></div>
+                    </div><small>Blob morph</small>
+                </div>
+            </div>
+        </section>
+
+        <section class="ex">
+            <h2><b>10</b>Before / After</h2>
+            <p class="why">Drag anywhere on the photo. Swap the filter on the second layer for any comparison.</p>
+            <div class="stage">
+                <div class="demo">
+                    <div class="box ba">
+                        <div class="ph" data-i="0"></div>
+                        <div class="ph" data-i="0"></div><input type="range" min="0" max="100" value="50"
+                            aria-label="Before and after">
+                    </div><small>Slider</small>
+                </div>
+            </div>
+        </section>
+
+        <section class="ex">
+            <h2><b>11</b>Layout Transitions</h2>
+            <p class="why">Hover a photo and the row rearranges around it.</p>
+            <div class="stage">
+                <div class="acc">
+                    <div class="ph" data-i="0"></div>
+                    <div class="ph" data-i="1"></div>
+                    <div class="ph" data-i="2"></div>
+                    <div class="ph" data-i="3"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="ex">
+            <h2><b>12</b>Experimental</h2>
+            <p class="why">Flashlight reveal, duotone that melts to colour, text that inverts over the photo, and
+                drifting light leaks.</p>
+            <div class="stage">
+                <div class="demo">
+                    <div class="box fl" data-track>
+                        <div class="ph" data-i="0"></div>
+                    </div><small>Flashlight</small>
+                </div>
+                <div class="demo">
+                    <div class="box dt">
+                        <div class="ph" data-i="1"></div>
+                    </div><small>Duotone</small>
+                </div>
+                <div class="demo">
+                    <div class="box df">
+                        <div class="ph" data-i="2"></div>
+                        <h3>Your title</h3>
+                    </div><small>Blend text</small>
+                </div>
+                <div class="demo">
+                    <div class="box lk">
+                        <div class="ph" data-i="3"></div>
+                    </div><small>Light leak</small>
+                </div>
+            </div>
+        </section>
+
+        <section class="ex">
+            <h2><b>13</b>Cursor &amp; Micro-interactions</h2>
+            <p class="why">The ring follows your cursor and swells over photos (desktop). The button leans toward the
+                pointer.</p>
+            <div class="stage"><button class="mag">Magnetic button</button></div>
+        </section>
+
+        <section class="ex">
+            <h2><b>14</b>Combo</h2>
+            <p class="why">Example 03 (tilt) plus 05 (grey to colour), combined by stacking their classes.</p>
+            <div class="stage">
+                <div class="demo">
+                    <div class="tw" data-track>
+                        <div class="box tilt h1">
+                            <div class="ph" data-i="3"></div><span class="cap">Your caption</span>
+                        </div>
+                    </div><small>Tilt + colour return</small>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <script src="effects.js"></script>
+</body>
+
+</html>
