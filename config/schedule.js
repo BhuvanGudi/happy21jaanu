@@ -333,7 +333,7 @@ window.BIRTHDAY_PLAN = {
       subtitle: "Recent but for you",
       message: "This needs no paragraph or explanations, this is just for you",
       items: [
-        { files: ["July 26th/back shot.mp4", "July 26th/back shot.mp4", "July 26th/back shot.mp4"], layout: "trio"},
+        { files: ["July 26th/Back shot.mp4", "July 26th/Back shot.mp4", "July 26th/Back shot.mp4"], layout: "trio"},
         { files: [], caption: "all yours"}
       ]
     },
